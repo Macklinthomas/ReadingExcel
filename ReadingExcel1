@@ -1,0 +1,48 @@
+#User imports the excel read from the command prompt.
+import xlrd
+
+
+#Declares the function to find the file the excel file to read.
+workbook = xlrd.open_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
+
+#Declares what sheet the data is named.
+worksheet = workbook.sheet_by_name("Sheet1")
+print (worksheet.cell(1,1).value)
+
+#Finds the number of excel sheets in the file.
+sheetCount = workbook.nsheets
+print (sheetCount)
+
+#Finds the total number of Rows and Columns in the sheet.
+totalRows = worksheet.nrows
+totalCols = worksheet.ncols
+print (totalRows)
+print (totalCols)
+
+
+#Defined a variable to create a list of Rows and Columns.
+table = list()
+record = list()
+
+#For loop to create a list of the data in the excel file.
+for x in range(totalRows):
+    for y in range(totalCols):
+        record.append(worksheet.cell(x,y).value)
+    table.append(record)
+    record = []
+    x += 1
+
+#Print the data in the file.
+print(table)
+
+def commaE(x):
+    for n in x:
+        print(n)
+        
+commaE(table)
+        
+        
+
+
+
+    
