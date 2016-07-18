@@ -14,11 +14,11 @@ Set cn = New ADODB.Connection
 
     With cn
         .Provider = "MSDASQL"
-        .ConnectionString = "GRID"
-        .Properties("Initial Catalog").Value = "m2sq"
-        '.Properties("Integrated Security").Value = "SSPI"
-        .Properties("User ID").Value = "asen"
-        .Properties("Password").Value = "Mpower99"
+        .ConnectionString = "*************"
+        .Properties("Initial Catalog").Value = "******************"
+        '.Properties("Integrated Security").Value = "**********"
+        .Properties("User ID").Value = "*********"
+        .Properties("Password").Value = "*******"
         .Open
     
     'End With
