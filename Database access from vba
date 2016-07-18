@@ -1,0 +1,36 @@
+Sub SWLReport()
+
+Application.ScreenUpdating = False
+
+Application.Calculation = xlCalculationManual
+
+Dim cn As ADODB.Connection, rs As ADODB.Recordset
+
+Dim sSQL As String
+
+sSQL = "SELECT * FROM SystemWideLoad where swInterval >= '2016-05-20 00:00:00'"
+
+Set cn = New ADODB.Connection
+
+    With cn
+        .Provider = "MSDASQL"
+        .ConnectionString = "GRID"
+        .Properties("Initial Catalog").Value = "m2sq"
+        '.Properties("Integrated Security").Value = "SSPI"
+        .Properties("User ID").Value = "asen"
+        .Properties("Password").Value = "Mpower99"
+        .Open
+    
+    'End With
+    
+    Debug.Print sSQL
+    
+        Set rs = .Execute(sSQL)
+    End With
+    
+    Sheets("Interval Data").Select
+    Range("A2").CopyFromRecordset rs
+    
+    Set cn = Nothing
+    
+End Sub
