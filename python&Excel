@@ -1,79 +1,42 @@
 >>> import openpyxl
->>> wb = openpyxl.load_workbook("C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
-SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
->>> import openpyxl
->>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
+>>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\Copy of CP ContactList.xlsx")
 >>> type(wb)
 <class 'openpyxl.workbook.workbook.Workbook' at 0x000000000333E448>
+>>> wb.get_sheet_names()
+['Single Rate (2)', 'Single Rate']
+>>> sheet['C3'].value
+'4/1/2015 - 5/1/2015'
+------------------------------------------------------------------------
 >>> import openpyxl
 >>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
->>> wb.get_sheet_names()
-['Sheet1', 'Sheet2', 'Sheet3']
->>> sheet = wb.get_sheet_by_name('Sheet1')
->>> sheet
-<Worksheet "Sheet1">
->>> type(sheet)
-<class 'openpyxl.worksheet.worksheet.Worksheet' at 0x000000000319DB98>
->>> sheet.title
-'Sheet1'
->>> anothersheet = wbactive
-Traceback (most recent call last):
-  File "<pyshell#22>", line 1, in <module>
-    anothersheet = wbactive
-NameError: name 'wbactive' is not defined
->>> anotherSheet = wb.active
->>> anotherSheet
-<Worksheet "Sheet1">
->>> sheet[B2].value
-Traceback (most recent call last):
-  File "<pyshell#25>", line 1, in <module>
-    sheet[B2].value
-NameError: name 'B2' is not defined
->>> sheet['B2'].value
+>>> sheet = wb.active
+>>> sheet.columns[1]
+(<Cell Sheet1.B1>, <Cell Sheet1.B2>, <Cell Sheet1.B3>, <Cell Sheet1.B4>, <Cell Sheet1.B5>, <Cell Sheet1.B6>, <Cell Sheet1.B7>, <Cell Sheet1.B8>, <Cell Sheet1.B9>, <Cell Sheet1.B10>, <Cell Sheet1.B11>, <Cell Sheet1.B12>, <Cell Sheet1.B13>)
+>>> for cellObj in sheet.columns[1]:
+	print(cellObj.value)
+
+	
+Invoice Number
 1197273
->>> sheet['B2'-'B5'].value
-Traceback (most recent call last):
-  File "<pyshell#27>", line 1, in <module>
-    sheet['B2'-'B5'].value
-TypeError: unsupported operand type(s) for -: 'str' and 'str'
->>> sheet['B5'].value
+1098091
+1108089
 1115608
->>> c = sheet[B1].value
-Traceback (most recent call last):
-  File "<pyshell#29>", line 1, in <module>
-    c = sheet[B1].value
-NameError: name 'B1' is not defined
->>> c = sheet['B1']
->>> c.value
-'Invoice Number'
->>> 'Row' + str(c.row) + ', Column' + c.Column + 'is' + c.value
-Traceback (most recent call last):
-  File "<pyshell#32>", line 1, in <module>
-    'Row' + str(c.row) + ', Column' + c.Column + 'is' + c.value
-AttributeError: 'Cell' object has no attribute 'Column'
->>> 'Row' + str(c.row) + ', Column' + c.column + 'is' + c.value
-'Row1, ColumnBisInvoice Number'
->>>  'Row ' + str(c.row) + ', Column ' + c.column + ' is ' + c.value
- 
-SyntaxError: unexpected indent
->>> 'Row ' + str(c.row) + ', Column ' + c.column + ' is ' + c.value
-'Row 1, Column B is Invoice Number'
->>> 'Cell ' + c.coordinate + ' is ' + c.value
-'Cell B1 is Invoice Number'
->>> sheet['C1'].val
-Traceback (most recent call last):
-  File "<pyshell#37>", line 1, in <module>
-    sheet['C1'].val
-AttributeError: 'Cell' object has no attribute 'val'
->>> sheet['C1'].value
-'Service Period'
->>> sheet.cell(row=1, column=2)
-<Cell Sheet1.B1>
->>> sheet.cell(row=1, column=2).value
-'Invoice Number'
->>> for i in range(1 ,8 ,2):
-	print(i, sheet.cell(row=i, column=2).value)
-1
-SyntaxError: invalid syntax
->>> for i in range(1, 8, 2):
-	print(i, sheet.cell(row=i))
+1123317
+1132871
+1143447
+1149411
+1157831
+1178234
+1187262
+1168040
+
+-------------------------------------------------------------------------------
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
+>>> sheet = wb.active
+>>> sheet.title = 'New Name'
+>>> wb.save(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
+>>> 
+>>> wb.get_sheet_names()
+['New Name', 'Sheet2', 'Sheet3']
+>>> 
