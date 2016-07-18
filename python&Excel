@@ -1,3 +1,6 @@
+https://automatetheboringstuff.com/chapter12/
+----------------------------------------------------------------------------------------------------
+-------Get a sheet name and a value of a cell-------------------
 >>> import openpyxl
 >>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\Copy of CP ContactList.xlsx")
 >>> type(wb)
@@ -7,6 +10,8 @@
 >>> sheet['C3'].value
 '4/1/2015 - 5/1/2015'
 ------------------------------------------------------------------------
+
+-------print the column------------------
 >>> import openpyxl
 >>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
 >>> sheet = wb.active
@@ -31,6 +36,8 @@ Invoice Number
 1168040
 
 -------------------------------------------------------------------------------
+
+--------------------get sheet names-------------------
 >>> import openpyxl
 >>> wb = openpyxl.load_workbook(r"C:\Users\macklin.thomas\Documents\12 Month Invoices.xlsx")
 >>> sheet = wb.active
@@ -40,3 +47,32 @@ Invoice Number
 >>> wb.get_sheet_names()
 ['New Name', 'Sheet2', 'Sheet3']
 >>> 
+
+---------------------------------------------------------------------------------
+-----------adding sheets into the file--------------------
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> wb.get_sheet_names()
+['Sheet']
+>>> wb.create_sheet()
+<Worksheet "Sheet1">
+>>> wb.get_sheet_names()
+['Sheet', 'Sheet1']
+>>> wb.create_sheet(index=0, title='First Sheet')
+<Worksheet "First Sheet">
+>>> wb.get_sheet_names()
+['First Sheet', 'Sheet', 'Sheet1']
+>>> wb.create_sheet(index=0, title='Middle Sheet')
+<Worksheet "Middle Sheet">
+>>> wb.get_sheet_names()
+['First Sheet', 'Sheet']
+
+-------------------------------------------------------
+-----------------writing into a cell------------
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.get_sheet_names
+>>> sheet = wb.get_sheet_by_name('Sheet')
+>>> sheet['A1'] = 'Hello World!'
+>>> sheet['A1'].value
+'Hello World!'
