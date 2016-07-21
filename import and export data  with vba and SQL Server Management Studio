@@ -1,0 +1,95 @@
+Connect to Database using SQL server management studio
+
+
+Sub get_dataFromPHP()
+
+Application.ScreenUpdating = False
+
+Application.Calculation = xlCalculationManual
+
+Dim cn As ADODB.Connection, rs As ADODB.Recordset
+
+Dim sSQL As String
+
+sSQL = "SELECT * FROM ContactList "
+
+Set cn = New ADODB.Connection
+
+    With cn
+        .Provider = "SQLOLEDB"
+        .ConnectionString = "MPRMS"
+        .Properties("Initial Catalog").Value = "RISKDBdev"
+        '.Properties("Integrated Security").Value = "SSPI"
+        .Properties("User ID").Value = "LinuxUser"
+        .Properties("Password").Value = "NCC-1942"
+        .Open
+    
+    'End With
+    
+    Debug.Print sSQL
+    
+        Set rs = .Execute(sSQL)
+    End With
+    
+    Sheets("Sheet1").Select
+    Range("A1").CopyFromRecordset rs
+    
+    Set cn = Nothing
+    
+    
+
+End Sub
+        
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Sub get_dataToPHP()
+
+Application.ScreenUpdating = False
+
+Application.Calculation = xlCalculationManual
+
+Dim cn As ADODB.Connection, rs As ADODB.Recordset
+
+Dim ID As Range, Cnumber As Range
+Dim Fname As Range, Lname As Range, City As Range
+
+Set ID = Sheet1.Range("O3")
+Set Fname = Sheet1.Range("O4")
+Set Lname = Sheet1.Range("O5")
+Set City = Sheet1.Range("O6")
+Set Cnumber = Sheet1.Range("O7")
+
+
+Dim sSQL As String
+
+sSQL = "INSERT INTO ContactList values (" & ID & "," & "'Fname'" & "," & "'Lname'" & "," & "'City'" & "," & Cnumber & ")"
+
+Set cn = New ADODB.Connection
+
+    With cn
+        .Provider = "SQLOLEDB"
+        .ConnectionString = "MPRMS"
+        .Properties("Initial Catalog").Value = "RISKDBdev"
+        '.Properties("Integrated Security").Value = "SSPI"
+        .Properties("User ID").Value = "LinuxUser"
+        .Properties("Password").Value = "NCC-1942"
+        .Open
+    
+    'End With
+    
+    Debug.Print sSQL
+    
+        Set rs = .Execute(sSQL)
+    End With
+
+    
+    Set cn = Nothing
+    
+
+
+
+End Sub
+
+
+
